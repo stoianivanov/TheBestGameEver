@@ -46,8 +46,23 @@ class Dungeon:
         return False
 
     def move_hero(self, direction):
+        new_pos_Y = self.__posY
+        new_pos_X = self.__posX
         if direction == 'up':
-            if 
+            new_pos_X -= 1
+        if direction == 'down':
+            new_pos_X += 1
+        if direction == 'left':
+            new_pos_Y -= 1
+        if direction == 'right':
+            new_pos_Y += 1
+        self.__dungeon[self.__posX][self.__posY] = '.'
+        self.__posX = new_pos_X
+        self.__posY = new_pos_Y
+        self.__dungeon[self.__posX][self.__posY] = 'H'
+        return True
+
+
 
 
 
@@ -58,4 +73,6 @@ h = Hero(name="Bron",
                          health=100, mana=100,
                          mana_regeneration_rate=2)
 d.spawn(h)
+d.print_map()
+d.move_hero('right')
 d.print_map()
