@@ -54,5 +54,8 @@ class EnemiesTest(unittest.TestCase):
         self.enemy.take_damage(30)
         self.assertEqual(self.enemy.health, 70)
 
+    def test_take_damage_130(self):
+        self.enemy.take_damage(130)
+        self.assertEqual(self.enemy.health, 0)
 if __name__ == '__main__':
     unittest.main()
