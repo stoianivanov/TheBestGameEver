@@ -19,8 +19,19 @@ class HeroTest(unittest.TestCase):
     def test_hero_is_alive(self):
         self.assertTrue(self.hero.is_alive(), True)
 
+    def test_is_hero_not_alive(self):
+        self.hero.reduce_health(100)
+        self.assertFalse(self.hero.is_alive())
+
     def test_hero_can_cast(self):
         self.assertTrue(self.hero.can_cast(), True)
+
+    def test_hero_can_cast_false(self):
+        self.hero.reduce_mana(100)
+        self.assertFalse(self.hero.can_cast())
+
+    def test_mana_regeneration_rate(self):
+        self.assertEqual(self.hero.mana_regeneration_rate(), 2)
 
     def test_hero_take_damage(self):
         damage_points = 20
