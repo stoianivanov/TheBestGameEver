@@ -80,5 +80,15 @@ class HeroTest(unittest.TestCase):
         self.assertEqual(str(self.hero.learned_spell[0]),
                          self.spell.get_name())
 
+    def test_hero_attack_with_spell(self):
+        self.hero.learn(self.spell)
+        self.assertEqual(self.hero.attack(by="spell"),
+                         self.spell.get_damage())
+
+    def test_hero_attack_with_weapon(self):
+        self.hero.equip(self.weapon)
+        self.assertEqual(self.hero.attack(by="weapon"),
+                         self.weapon.get_damage())
+
 if __name__ == '__main__':
     unittest.main()
