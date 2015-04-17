@@ -5,6 +5,12 @@ class Spell:
         self.__mana_cost = mana_cost
         self.__cast_range = cast_range
 
+    def __str__(self):
+        return str(self.__name)
+
+    def __repr__(self):
+        return str(self.__name)
+
     def get_name(self):
         return self.__name
 
