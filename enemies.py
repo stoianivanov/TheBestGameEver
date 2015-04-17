@@ -57,3 +57,9 @@ class Enemy:
         if self.mana > max_mana:
             self.mana = max_mana
         return self.mana
+
+    def attack(self):
+        return self.damage
+
+    def take_damage(self, damage_points):
+        self.health -= damage_points
