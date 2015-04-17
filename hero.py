@@ -1,3 +1,6 @@
+from weapon import Weapon
+
+
 class Hero:
     def __init__(self, name, title, health=100,
                  mana=100, mana_regeneration_rate=2):
@@ -6,12 +9,12 @@ class Hero:
         self.__health = health
         self.__mana = mana
         self.__mana_regeneration_rate = mana_regeneration_rate
+        self.weapon_equipment = []
+        self.learned_spell = []
 
-    @property
     def name(self):
         return self.__name
 
-    @property
     def title(self):
         return self.__title
 
@@ -21,7 +24,6 @@ class Hero:
     def get_mana(self):
         return self.__mana
 
-    @property
     def mana_regeneration_rate(self):
         return self.__mana_regeneration_rate
 
@@ -46,6 +48,10 @@ class Hero:
         self.__mana -= mana_reducing_points
         return self.get_mana()
 
+    def reduce_health(self, dying_points):
+        self.__health -= dying_points
+        return self.get_health()
+
     def take_healing(self, healing_points):
         if self.is_alive() == False:
             return False
@@ -56,7 +62,12 @@ class Hero:
             self.__health = 100
         return True
 
+    def make_move(self):
+        pass
+
     def take_mana(self, mana_points):
+        if self.make_move():
+            self.__mana += self.__mana_regeneration_rate
         max_mana = 100
         current_mana = self.get_mana()
         if self.get_health() < current_mana:
@@ -65,6 +76,21 @@ class Hero:
         if current_mana > max_mana:
             self.__mana = 100
         return self.get_mana()
+
+    def equip(self, weapon):
+        if len(self.weapon_equipment) == 1:
+            current_weapon = self.weapon_equipment[0]
+            self.weapon_equipment.remove(current_weapon)
+        self.weapon_equipment.append(weapon)
+
+    def learn(self, spell):
+        if len(self.learned_spell) == 1:
+            current_spell = self.learned_spell[0]
+            self.learned_spell.remove(current_spell)
+        self.learned_spell.append(spell)
+
+    def attack(self, by):
+        pass
 
 # h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
 # print(h.take_damage(20))
