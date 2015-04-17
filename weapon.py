@@ -8,3 +8,9 @@ class Weapon:
 
     def get_damage(self):
         return self.__damage
+
+    def __str__(self):
+        return "{}".format(self.get_name())
+
+    def __repr__(self):
+        return str(self.__name)
