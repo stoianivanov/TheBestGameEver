@@ -78,12 +78,16 @@ class Dungeon:
 
 
 
-# d = Dungeon("level1.txt")
-# d.print_map()
-# h = Hero(name="Bron",
-#             title="Dragonslayer",
-#                          health=100, mana=100,
-#                          mana_regeneration_rate=2)
-# d.spawn(h)
-# d.print_map()
+d = Dungeon("level1.txt")
+d.print_map()
+h = Hero(name="Bron",
+            title="Dragonslayer",
+                         health=100, mana=100,
+                         mana_regeneration_rate=2)
+d.spawn(h)
+d.print_map()
+"""d.move_hero('right')
+d.print_map()
+d.move_hero('right')"""
+d.move_hero('down')
 
