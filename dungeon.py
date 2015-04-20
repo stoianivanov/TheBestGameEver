@@ -1,7 +1,41 @@
 from hero import Hero
+from random import randint
 
 
 class Dungeon:
+
+    TREASURE = {
+        "spell": {"Fireball": {"damage" : 30,
+                               "mana_cost" : 50,
+                               "cast_range": 2},
+                  "Avada Kedavra": {"damage":100,
+                                    "mana_cost":100,
+                                    "cost_range":100},
+                  "Crucio": {"damage":50,
+                             "mana_cost":60,
+                             "cost_range":10},
+                  "Expelliarmus": {"damage":10,
+                             "mana_cost":10,
+                             "cost_range":5},
+                  "Imperio": {"damage":30,
+                             "mana_cost":10,
+                             "cost_range":5},
+                  "Oppugno": {"damage":20,
+                             "mana_cost":10,
+                             "cost_range":2}
+                               },
+        "mana": {"mana_points": 10},
+        "weapon": {
+                   "The Axe of Destiny": 20,
+                   "Bomb": 35,
+                   "Pistol": 10,
+                   "Dual Pistols": 20,
+                   "Lazer Gun": 15,
+                   "Pipe Bombs": 10
+                   },
+        "health": {"healing_points": 20},
+    }
+
     def __init__(self, file_path):
         lines = ""
         with open(file_path) as f:
@@ -76,6 +110,20 @@ class Dungeon:
     def hero_attack(by):
         pass
 
+    def pick_treasure(self):
+        list_of_TREASURE = ["spell", "weapon", "mana", "health"]
+        pick = randint(0, len(list_of_TREASURE)-1)
+        if list_of_TREASURE[pick] == "spell":
+            return self.TREASURE["spell"]["Imperio"]
+        elif list_of_TREASURE[pick] == "mana":
+            return self.TREASURE["mana"]
+        elif list_of_TREASURE[pick] == "health":
+            return self.TREASURE["health"]
+        elif list_of_TREASURE[pick] == "weapon":
+            return self.TREASURE["weapon"]["Bomb"]
+
+
+
 d = Dungeon("level1.txt")
 d.print_map()
 h = Hero(name="Bron",
@@ -93,3 +141,9 @@ h = Hero(name="Bron",
 d.spawn(h)
 d.print_map()
 
+d.move_hero('right')
+"""
+d.move_hero('down')
+d.move_hero('right')"""
+d.move_hero('down')
+d.pick_treasure()
