@@ -70,9 +70,9 @@ class Dungeon:
         return False
 
     def out_of_map(self, X, Y):
-        if X not in range(0, len(self.dungeon[0])):
+        if X not in range(0, len(self.dungeon)):
             return True
-        if Y not in range(0, len(self.dungeon)):
+        if Y not in range(0, len(self.dungeon[0])):
             return True
         return False
 
@@ -96,9 +96,6 @@ class Dungeon:
             new_pos_Y -= 1
         if direction == 'right':
             new_pos_Y += 1
-        print(self.__dungeon[new_pos_X][new_pos_Y])
-        print (self.is_obstacle(new_pos_X, new_pos_Y))
-        print (self.out_of_map(new_pos_X, new_pos_Y))
         if self.is_obstacle(new_pos_X, new_pos_Y)\
            or self.out_of_map(new_pos_X, new_pos_Y):
             return False
@@ -122,6 +119,8 @@ class Dungeon:
         elif list_of_TREASURE[pick] == "weapon":
             return self.TREASURE["weapon"]["Bomb"]
 
+    def hero_attack(by):
+        pass
 
 d = Dungeon("level1.txt")
 d.print_map()
