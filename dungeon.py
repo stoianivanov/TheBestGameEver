@@ -36,9 +36,9 @@ class Dungeon:
         return False
 
     def out_of_map(self, X, Y):
-        if X not in range(0, len(self.dungeon[0])):
+        if X not in range(0, len(self.dungeon)):
             return True
-        if Y not in range(0, len(self.dungeon)):
+        if Y not in range(0, len(self.dungeon[0])):
             return True
         return False
 
@@ -62,10 +62,8 @@ class Dungeon:
             new_pos_Y -= 1
         if direction == 'right':
             new_pos_Y += 1
-        print(self.__dungeon[new_pos_X][new_pos_Y])
-        print (self.is_obstacle(new_pos_X, new_pos_Y))
-        print (self.out_of_map(new_pos_X, new_pos_Y))
-        if self.is_obstacle(new_pos_X, new_pos_Y) or self.out_of_map(new_pos_X, new_pos_Y):
+        if self.is_obstacle(new_pos_X, new_pos_Y)\
+           or self.out_of_map(new_pos_X, new_pos_Y):
             return False
 
         self.end_of_dungeon(new_pos_X, new_pos_Y)
@@ -75,6 +73,8 @@ class Dungeon:
         self.__dungeon[self.__posX][self.__posY] = 'H'
         return True
 
+    def hero_attack(by):
+        pass
 
 d = Dungeon("level1.txt")
 d.print_map()
@@ -84,10 +84,6 @@ h = Hero(name="Bron",
                          mana_regeneration_rate=2)
 d.spawn(h)
 d.print_map()
-"""d.move_hero('right')
-d.print_map()
-d.move_hero('right')"""
-d.move_hero('down')
 d = Dungeon("level1.txt")
 d.print_map()
 h = Hero(name="Bron",
@@ -96,3 +92,4 @@ h = Hero(name="Bron",
                          mana_regeneration_rate=2)
 d.spawn(h)
 d.print_map()
+
