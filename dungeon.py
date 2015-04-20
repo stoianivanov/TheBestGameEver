@@ -56,6 +56,10 @@ class Dungeon:
             new_pos_Y -= 1
         if direction == 'right':
             new_pos_Y += 1
+
+        if self.is_obstacle(new_pos_X, new_pos_Y) or self.out_of_map(new_pos_X, new_pos_Y):
+            return False
+
         self.__dungeon[self.__posX][self.__posY] = '.'
         self.__posX = new_pos_X
         self.__posY = new_pos_Y
@@ -76,3 +80,4 @@ d.spawn(h)
 d.print_map()
 d.move_hero('right')
 d.print_map()
+d.move_hero('right')
