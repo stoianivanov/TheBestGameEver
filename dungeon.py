@@ -3,7 +3,9 @@ from hero import Hero
 
 class Dungeon:
     def __init__(self, file_path):
-        lines = open(file_path).read().split('\n')
+        lines = ""
+        with open(file_path) as f:
+            lines = f.read().split('\n')
         lines = [line.strip(" ") for line in lines]
         self.__dungeon = [list(line) for line in lines]
         self.__dungeon.pop(-1)
@@ -50,6 +52,7 @@ class Dungeon:
             print("You win")
 
     def move_hero(self, direction):
+
         new_pos_Y = self.__posY
         new_pos_X = self.__posX
         if direction == 'up':
