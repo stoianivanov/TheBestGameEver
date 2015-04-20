@@ -65,7 +65,8 @@ class Dungeon:
         print(self.__dungeon[new_pos_X][new_pos_Y])
         print (self.is_obstacle(new_pos_X, new_pos_Y))
         print (self.out_of_map(new_pos_X, new_pos_Y))
-        if self.is_obstacle(new_pos_X, new_pos_Y) or self.out_of_map(new_pos_X, new_pos_Y):
+        if self.is_obstacle(new_pos_X, new_pos_Y)\
+           or self.out_of_map(new_pos_X, new_pos_Y):
             return False
 
         self.end_of_dungeon(new_pos_X, new_pos_Y)
@@ -76,14 +77,12 @@ class Dungeon:
         return True
 
 
-
-
 d = Dungeon("level1.txt")
 d.print_map()
 h = Hero(name="Bron",
-            title="Dragonslayer",
-                         health=100, mana=100,
-                         mana_regeneration_rate=2)
+         title="Dragonslayer",
+         health=100, mana=100,
+         mana_regeneration_rate=2)
 d.spawn(h)
 d.print_map()
 """d.move_hero('right')
