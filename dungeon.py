@@ -52,21 +52,7 @@ class Dungeon:
             print("You win")
 
     def move_hero(self, direction):
-<<<<<<< HEAD
-        pass
 
-
-
-
-# d = Dungeon("level1.txt")
-# d.print_map()
-# h = Hero(name="Bron",
-#             title="Dragonslayer",
-#                          health=100, mana=100,
-#                          mana_regeneration_rate=2)
-# d.spawn(h)
-# d.print_map()
-=======
         new_pos_Y = self.__posY
         new_pos_X = self.__posX
         if direction == 'up':
@@ -106,4 +92,3 @@ d.print_map()
 d.print_map()
 d.move_hero('right')"""
 d.move_hero('down')
->>>>>>> 9552d33e538b453b4e6457ec88b32da18d97847e
