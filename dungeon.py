@@ -3,7 +3,9 @@ from hero import Hero
 
 class Dungeon:
     def __init__(self, file_path):
-        lines = open(file_path).read().split('\n')
+        lines = ""
+        with open(file_path) as f:
+            lines = f.read().split('\n')
         lines = [line.strip(" ") for line in lines]
         self.__dungeon = [list(line) for line in lines]
         self.__dungeon.pop(-1)
@@ -46,16 +48,16 @@ class Dungeon:
         return False
 
     def move_hero(self, direction):
-        if direction == 'up':
-            if 
+        pass
 
 
 
-d = Dungeon("level1.txt")
-d.print_map()
-h = Hero(name="Bron",
-            title="Dragonslayer",
-                         health=100, mana=100,
-                         mana_regeneration_rate=2)
-d.spawn(h)
-d.print_map()
+
+# d = Dungeon("level1.txt")
+# d.print_map()
+# h = Hero(name="Bron",
+#             title="Dragonslayer",
+#                          health=100, mana=100,
+#                          mana_regeneration_rate=2)
+# d.spawn(h)
+# d.print_map()
