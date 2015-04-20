@@ -5,34 +5,13 @@ from random import randint
 class Dungeon:
 
     TREASURE = {
-        "spell": {"Fireball": {"damage" : 30,
-                               "mana_cost" : 50,
-                               "cast_range": 2},
-                  "Avada Kedavra": {"damage":100,
-                                    "mana_cost":100,
-                                    "cost_range":100},
-                  "Crucio": {"damage":50,
-                             "mana_cost":60,
-                             "cost_range":10},
-                  "Expelliarmus": {"damage":10,
-                             "mana_cost":10,
-                             "cost_range":5},
-                  "Imperio": {"damage":30,
-                             "mana_cost":10,
-                             "cost_range":5},
-                  "Oppugno": {"damage":20,
-                             "mana_cost":10,
-                             "cost_range":2}
-                               },
+        "spell": {
+                    "Fireball": {"damage": 30,
+                                 "mana_cost": 50,
+                                 "cast_range": 2}
+                                 },
         "mana": {"mana_points": 10},
-        "weapon": {
-                   "The Axe of Destiny": 20,
-                   "Bomb": 35,
-                   "Pistol": 10,
-                   "Dual Pistols": 20,
-                   "Lazer Gun": 15,
-                   "Pipe Bombs": 10
-                   },
+        "weapon": {"The Axe of Destiny": 20},
         "health": {"healing_points": 20},
     }
 
@@ -85,6 +64,10 @@ class Dungeon:
         if self.__dungeon[pos_x][pos_y] == 'G':
             print("You win")
 
+    def find_treasure(self, pos_x, pos_y):
+        if self.__dungeon[pos_x][pos_y] == 'T':
+            self.pick_treasure()
+
     def move_hero(self, direction):
         new_pos_Y = self.__posY
         new_pos_X = self.__posX
@@ -114,14 +97,13 @@ class Dungeon:
         list_of_TREASURE = ["spell", "weapon", "mana", "health"]
         pick = randint(0, len(list_of_TREASURE)-1)
         if list_of_TREASURE[pick] == "spell":
-            return self.TREASURE["spell"]["Imperio"]
+            return self.TREASURE["spell"]["Fireball"]
         elif list_of_TREASURE[pick] == "mana":
             return self.TREASURE["mana"]
         elif list_of_TREASURE[pick] == "health":
             return self.TREASURE["health"]
         elif list_of_TREASURE[pick] == "weapon":
-            return self.TREASURE["weapon"]["Bomb"]
-
+            return self.TREASURE["weapon"]["The Axe of Destiny"]
 
 
 d = Dungeon("level1.txt")
@@ -141,9 +123,9 @@ h = Hero(name="Bron",
 d.spawn(h)
 d.print_map()
 
-d.move_hero('right')
+#d.move_hero('right')
 """
 d.move_hero('down')
 d.move_hero('right')"""
 d.move_hero('down')
-d.pick_treasure()
+print(d.pick_treasure())
