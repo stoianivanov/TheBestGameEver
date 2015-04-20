@@ -1,39 +1,27 @@
 from hero import Hero
 from random import randint
+from spell import Spell
+from weapon import Weapon
+import random
 
 
 class Dungeon:
 
     TREASURE = {
-        "spell": {"Fireball": {"damage" : 30,
-                               "mana_cost" : 50,
-                               "cast_range": 2},
-                  "Avada Kedavra": {"damage":100,
-                                    "mana_cost":100,
-                                    "cost_range":100},
-                  "Crucio": {"damage":50,
-                             "mana_cost":60,
-                             "cost_range":10},
-                  "Expelliarmus": {"damage":10,
-                             "mana_cost":10,
-                             "cost_range":5},
-                  "Imperio": {"damage":30,
-                             "mana_cost":10,
-                             "cost_range":5},
-                  "Oppugno": {"damage":20,
-                             "mana_cost":10,
-                             "cost_range":2}
-                               },
-        "mana": {"mana_points": 10},
-        "weapon": {
-                   "The Axe of Destiny": 20,
-                   "Bomb": 35,
-                   "Pistol": 10,
-                   "Dual Pistols": 20,
-                   "Lazer Gun": 15,
-                   "Pipe Bombs": 10
-                   },
-        "health": {"healing_points": 20},
+        "spell": [ Spell("Fireball",damage=30, mana_cost=50, cast_range=2),
+                   Spell("Avada Kedavra",damage=100, mana_cost=100, cast_range=100),
+                   Spell("Crucio",damage=50, mana_cost=60, cast_range=10),
+                   Spell("Expelliarmus",damage=10, mana_cost=10, cast_range=5)],
+        "mana": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        "weapon": [
+                   Weapon("The Axe of Destiny", damage=20),
+                   Weapon("Bomb", damage=35),
+                   Weapon("Pistol", damage=10),
+                   Weapon("Dual Pistols", damage=20),
+                   Weapon("Lazer Gun", damage=15),
+                   Weapon("Pipe Bombs", damage=10)
+                   ],
+        "health": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     }
 
     def __init__(self, file_path):
@@ -45,6 +33,7 @@ class Dungeon:
         self.__dungeon.pop(-1)
         self.__posX = -1
         self.__posY = -1
+        self.hero = None
 
     @property
     def dungeon(self):
@@ -59,7 +48,7 @@ class Dungeon:
             print (''.join(line))
 
     def spawn(self, hero):
-
+        self.hero = hero
         for x in range(0, len(self.dungeon)):
             for y in range(0, len(self.dungeon[x])):
                 if self.dungeon[x][y] == 'S':
@@ -111,13 +100,24 @@ class Dungeon:
         list_of_TREASURE = ["spell", "weapon", "mana", "health"]
         pick = randint(0, len(list_of_TREASURE)-1)
         if list_of_TREASURE[pick] == "spell":
-            return self.TREASURE["spell"]["Imperio"]
+            new_spell = random.choice(self.TREASURE["spell"])
+            self.hero.learn(new_spell)
+            string = "Learned a new spell: {}.".format(new_spell.get_name())
         elif list_of_TREASURE[pick] == "mana":
-            return self.TREASURE["mana"]
+            mana_points = random.choice(self.TREASURE["mana"])
+            self.hero.take_mana(mana_points)
+            string = "Found mana potion. Hero mana is {}.".format(
+                self.hero.get_mana())
         elif list_of_TREASURE[pick] == "health":
-            return self.TREASURE["health"]
+            healing_points = random.choice(self.TREASURE["health"])
+            self.hero.take_healing(healing_points)
+            string = "Found healing potion. Hero health is {}.".format(
+                self.hero.get_health())
         elif list_of_TREASURE[pick] == "weapon":
-            return self.TREASURE["weapon"]["Bomb"]
+            new_weapon = random.choice(self.TREASURE["weapon"])
+            self.hero.equip(new_weapon)
+            string = "Hero found new weapon: {}.".format(new_weapon.get_name())
+        return string
 
     def hero_attack(by):
         pass
@@ -134,4 +134,4 @@ d.print_map()
 d.print_map()
 d.move_hero('right')"""
 d.move_hero('down')
-d.pick_treasure()
+print(d.pick_treasure())
