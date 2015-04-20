@@ -47,7 +47,12 @@ class Dungeon:
             return True
         return False
 
+    def end_of_dungeon(self, pos_x, pos_y):
+        if self.__dungeon[pos_x][pos_y] == 'G':
+            print("You win")
+
     def move_hero(self, direction):
+<<<<<<< HEAD
         pass
 
 
@@ -61,3 +66,44 @@ class Dungeon:
 #                          mana_regeneration_rate=2)
 # d.spawn(h)
 # d.print_map()
+=======
+        new_pos_Y = self.__posY
+        new_pos_X = self.__posX
+        if direction == 'up':
+            new_pos_X -= 1
+        if direction == 'down':
+            new_pos_X += 1
+        if direction == 'left':
+            new_pos_Y -= 1
+        if direction == 'right':
+            new_pos_Y += 1
+        print(self.__dungeon[new_pos_X][new_pos_Y])
+        print (self.is_obstacle(new_pos_X, new_pos_Y))
+        print (self.out_of_map(new_pos_X, new_pos_Y))
+        if self.is_obstacle(new_pos_X, new_pos_Y) or self.out_of_map(new_pos_X, new_pos_Y):
+            return False
+
+        self.end_of_dungeon(new_pos_X, new_pos_Y)
+        self.__dungeon[self.__posX][self.__posY] = '.'
+        self.__posX = new_pos_X
+        self.__posY = new_pos_Y
+        self.__dungeon[self.__posX][self.__posY] = 'H'
+        return True
+
+
+
+
+
+d = Dungeon("level1.txt")
+d.print_map()
+h = Hero(name="Bron",
+            title="Dragonslayer",
+                         health=100, mana=100,
+                         mana_regeneration_rate=2)
+d.spawn(h)
+d.print_map()
+"""d.move_hero('right')
+d.print_map()
+d.move_hero('right')"""
+d.move_hero('down')
+>>>>>>> 9552d33e538b453b4e6457ec88b32da18d97847e
