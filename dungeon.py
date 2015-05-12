@@ -35,6 +35,7 @@ class Dungeon:
         self.__posX = -1
         self.__posY = -1
         self.hero = None
+        self.hero_info = None
         self.enemy = Enemy(100, 50, 10)
 
     @property
@@ -51,6 +52,7 @@ class Dungeon:
 
     def spawn(self, hero):
         self.hero = hero
+        self.hero_info = hero
         for x in range(0, len(self.dungeon)):
             for y in range(0, len(self.dungeon[x])):
                 if self.dungeon[x][y] == 'S':
@@ -96,14 +98,14 @@ class Dungeon:
             return False
         if self.__dungeon[new_pos_X][new_pos_Y] == 'T':
             print(self.pick_treasure())
-            print(self.hero.get_health())
-            print(self.hero.get_mana())
         if self.__dungeon[new_pos_X][new_pos_Y] == 'E':
             self.hero_attack('spell')
             if not self.hero.is_alive():
                 self.__dungeon[self.__posX][self.__posY] = '.'
-                print("Game Over!!!!")
+                if not self.spawn(self.hero_info):
+                    print("Game over!!")
                 return ''
+            self.enemy = Enemy(100, 10, 30)
         self.end_of_dungeon(new_pos_X, new_pos_Y)
         self.__dungeon[self.__posX][self.__posY] = '.'
         self.__posX = new_pos_X
@@ -164,3 +166,16 @@ d.move_hero("right")
 d.move_hero("right")
 d.move_hero("right")
 d.move_hero("up")
+d.print_map()
+d.move_hero("up")
+d.move_hero("up")
+d.move_hero("right")
+d.move_hero("right")
+d.move_hero("right")
+d.move_hero("right")
+d.print_map()
+d.move_hero('down')
+d.move_hero('down')
+d.move_hero('down')
+d.move_hero('down')
+d.print_map()

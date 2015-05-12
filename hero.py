@@ -11,6 +11,7 @@ class Hero:
         self.__mana = mana
         self.__mana_regeneration_rate = mana_regeneration_rate
         self.weapon_equipment = []
+        self.weapon_equipment.append(Weapon("Python", 30))
         self.learned_spell = []
 
     def name(self):
@@ -52,7 +53,6 @@ class Hero:
     def reduce_health(self, dying_points):
         if dying_points >= self.__health:
             self.__health = 0
-            self.is_alive = False
             return 0
         self.__health -= dying_points
         return self.get_health()
@@ -106,11 +106,3 @@ class Hero:
                 return damage
         return 0
 
-
-# h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
-# spell = Spell(name="Fireball",
-#                               damage=30,
-#                               mana_cost=50,
-#                               cast_range=2)
-# h.learn(spell)
-# print(h.attack("spell"))
