@@ -65,3 +65,4 @@ class Enemy:
         self.health -= damage_points
         if self.health < 0:
             self.health = 0
+            

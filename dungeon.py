@@ -3,6 +3,7 @@ from random import randint
 from spell import Spell
 from weapon import Weapon
 import random
+from fights import *
 
 
 class Dungeon:
@@ -34,6 +35,7 @@ class Dungeon:
         self.__posX = -1
         self.__posY = -1
         self.hero = None
+        self.enemy = Enemy(100, 50, 10)
 
     @property
     def dungeon(self):
@@ -92,7 +94,16 @@ class Dungeon:
         if self.is_obstacle(new_pos_X, new_pos_Y)\
            or self.out_of_map(new_pos_X, new_pos_Y):
             return False
-
+        if self.__dungeon[new_pos_X][new_pos_Y] == 'T':
+            print(self.pick_treasure())
+            print(self.hero.get_health())
+            print(self.hero.get_mana())
+        if self.__dungeon[new_pos_X][new_pos_Y] == 'E':
+            self.hero_attack('spell')
+            if not self.hero.is_alive():
+                self.__dungeon[self.__posX][self.__posY] = '.'
+                print("Game Over!!!!")
+                return ''
         self.end_of_dungeon(new_pos_X, new_pos_Y)
         self.__dungeon[self.__posX][self.__posY] = '.'
         self.__posX = new_pos_X
@@ -100,9 +111,15 @@ class Dungeon:
         self.__dungeon[self.__posX][self.__posY] = 'H'
         return True
 
+    def hero_attack(self, by):
+        fights = Fights(self.hero, self.enemy)
+        while self.hero.is_alive() and self.enemy.is_alive():
+            print(fights.hero_attack(by))
+            if not self.enemy.is_alive() and self.hero.is_alive():
+                break
+            print(fights.enemy_attack())
 
-    def hero_attack(by):
-        pass
+        return True
 
     def pick_treasure(self):
         list_of_TREASURE = ["spell", "weapon", "mana", "health"]
@@ -136,18 +153,14 @@ h = Hero(name="Bron",
                          mana_regeneration_rate=2)
 d.spawn(h)
 d.print_map()
-d = Dungeon("level1.txt")
-d.print_map()
-h = Hero(name="Bron",
-            title="Dragonslayer",
-                         health=100, mana=100,
-                         mana_regeneration_rate=2)
-d.spawn(h)
-d.print_map()
-
-#d.move_hero('right')
-"""
+d.move_hero("right")
 d.move_hero('down')
-d.move_hero('right')"""
+d.print_map()
 d.move_hero('down')
-print(d.pick_treasure())
+d.move_hero('down')
+d.move_hero("right")
+d.print_map()
+d.move_hero("right")
+d.move_hero("right")
+d.move_hero("right")
+d.move_hero("up")
