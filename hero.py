@@ -50,6 +50,8 @@ class Hero:
         return self.get_mana()
 
     def reduce_health(self, dying_points):
+        if dying_points >= self.__health:
+            return 0
         self.__health -= dying_points
         return self.get_health()
 
