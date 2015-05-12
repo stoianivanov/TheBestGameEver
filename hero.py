@@ -1,4 +1,5 @@
 from weapon import Weapon
+from spell import Spell
 
 
 class Hero:
@@ -96,10 +97,16 @@ class Hero:
                 return damage
         if by == "spell":
             if len(self.learned_spell) == 1:
+                self.reduce_mana(self.learned_spell[0].get_mana_cost())
                 damage = self.learned_spell[0].get_damage()
                 return damage
         return 0
 
 
 # h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
-# print(h.take_damage(20))
+# spell = Spell(name="Fireball",
+#                               damage=30,
+#                               mana_cost=50,
+#                               cast_range=2)
+# h.learn(spell)
+# print(h.attack("spell"))
