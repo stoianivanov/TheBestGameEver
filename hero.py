@@ -53,7 +53,6 @@ class Hero:
     def reduce_health(self, dying_points):
         if dying_points >= self.__health:
             self.__health = 0
-            self.is_alive = False
             return 0
         self.__health -= dying_points
         return self.get_health()

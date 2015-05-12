@@ -103,7 +103,7 @@ class Dungeon:
             if not self.hero.is_alive():
                 self.__dungeon[self.__posX][self.__posY] = '.'
                 if not self.spawn(self.hero_info):
-                    print("Game Over!!!!")
+                    print("Game over!!")
                 return ''
             self.enemy = Enemy(100, 10, 30)
         self.end_of_dungeon(new_pos_X, new_pos_Y)
