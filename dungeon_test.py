@@ -19,10 +19,21 @@ class DungeonTest(unittest.TestCase):
                            cast_range=2)
         self.d = Dungeon("level1.txt")
 
-    # def test_out_of(self):
-    #     d1 = Dungeon("level1.txt")
-    #     self.assertTrue(d1.spawn(self.hero))
+    def test_out_of_map(self):
+        self.assertTrue(self.d.out_of_map(12, 20))
+
+    def test_in_the_map(self):
+        self.assertFalse(self.d.out_of_map(2, 3))
+
     def test_obrancle(self):
         self.assertTrue(self.d.is_obstacle(2, 3))
+
+    def test_position_of_hero(self):
+        self.d.spawn(self.hero)
+        self.d.print_map()
+        print(self.d.return_position(self.d))
+    # def test_can_spawn_hero(self):
+        # self.d.spawn(self.hero)
+
 if __name__ == '__main__':
     unittest.main()

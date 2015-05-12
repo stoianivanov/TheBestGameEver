@@ -47,6 +47,10 @@ class Dungeon:
         for line in self.dungeon:
             print (''.join(line))
 
+    def return_position(self, hero):
+        self.hero = hero
+        return (self.hero.__posX, self.hero.__posY)
+
     def spawn(self, hero):
         self.hero = hero
         for x in range(0, len(self.dungeon)):
@@ -72,7 +76,7 @@ class Dungeon:
 
     def end_of_dungeon(self, pos_x, pos_y):
         if self.__dungeon[pos_x][pos_y] == 'G':
-            print("You win")
+            return "You win"
 
     def move_hero(self, direction):
         new_pos_Y = self.__posY
